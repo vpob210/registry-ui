@@ -1,0 +1,389 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+h1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px; /* Увеличенный отступ снизу для заголовка */
+}
+
+.container {
+    display: flex; /* Используем flexbox для боковой панели и содержимого */
+}
+
+.sidebar {
+    width: 200px; /* Ширина боковой панели */
+    margin-right: 20px; /* Отступ между боковой панелью и основным содержимым */
+    flex-shrink: 0; /* Предотвращаем сжатие боковой панели */
+}
+
+.tab-buttons {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.tab-buttons button {
+    padding: 10px 20px;
+    margin: 10px 0; /* Отступ между кнопками */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Синий цвет для кнопок */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Кнопки занимают всю ширину боковой панели */
+}
+
+.tab-buttons button:hover {
+    background-color: #0056b3; /* Более темный синий при наведении */
+}
+
+#search-form {
+    text-align: left;
+}
+
+#search-input {
+    padding: 10px;
+    width: calc(100% - 22px); /* Учитываем отступы */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Отступ между полем и кнопкой */
+}
+
+#search-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745; /* Зеленый цвет для кнопки "Найти" */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Кнопка занимает всю ширину поля */
+}
+
+#search-form button:hover {
+    background-color: #218838; /* Более темный зеленый при наведении */
+}
+#images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Центрируем основной список образов */
+    flex-grow: 1; /* Позволяем основному содержимому занимать оставшееся пространство */
+    padding: 20px; /* Отступы вокруг контейнера */
+    background-color: #f9f9f9; /* Цвет фона */
+    border-radius: 10px; /* Скругление углов у контейнера */
+}
+
+.image-tile {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px;
+    width: 230px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: default; /* Убираем указатель курсора */
+    transition: transform 0.2s;
+    box-sizing: border-box; /* Учитываем отступы в ширине */
+    border: 1px solid #e1e1e1; /* Граница плитки */
+}
+
+.image-tile:hover {
+    transform: scale(1.05);
+}
+
+.tags-list {
+    list-style-type: none;
+    padding: 0;
+    display: none;
+}
+
+.tags-list.active {
+    display: block;
+}
+
+.tag-tile {
+    background-color: #e9ecef; /* Цвет фона для тегов */
+    margin: 5px; /* Отступы между тегами */
+    padding: 10px; /* Отступы внутри тегов */
+    border-radius: 5px; /* Скругление углов у тегов */
+    border: 1px solid #d1d1d1; /* Граница тегов */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Тень тегов */
+    flex: 1 1 auto; /* Позволяем тегам растягиваться */
+    min-width: 150px; /* Минимальная ширина для тегов */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Начальная прозрачность */
+    }
+    100% {
+        opacity: 1; /* Полная видимость */
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1; /* Полная видимость */
+    }
+    100% {
+        opacity: 0; /* Прозрачность */
+    }
+}
+.notification {
+    position: fixed; /* Фиксированное положение */
+    top: 20px; /* Отступ сверху (можно регулировать) */
+    left: 50%; /* Позиционирование по центру по горизонтали */
+    transform: translateX(-50%); /* Сдвигаем элемент для точного центрирования */
+    background-color: #f1f1f1; /* Цвет фона по умолчанию */
+    color: #333; /* Цвет текста по умолчанию */
+    padding: 15px 30px; /* Отступы внутри */
+    border-radius: 5px; /* Скругленные углы */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    font-size: 16px; /* Размер текста */
+    font-weight: bold; /* Жирный текст */
+    z-index: 1000; /* Делаем уведомление поверх всех остальных элементов */
+    display: none; /* По умолчанию скрыто */
+    opacity: 0; /* Прозрачное по умолчанию */
+    animation-duration: 2s; /* Длительность анимации */
+    animation-fill-mode: forwards; /* Сохраняем конечное состояние анимации */
+}
+/* Для показа уведомления */
+.show-notification {
+    display: block; /* Показываем элемент */
+    animation-name: fadeIn; /* Анимация появления */
+}
+
+/* Для скрытия уведомления */
+.hide-notification {
+    animation-name: fadeOut; /* Анимация исчезновения */
+}
+/* Уведомление об ошибке */
+.notification-error {
+    background-color: #f8d7da; /* Красный фон */
+    color: #721c24; /* Цвет текста ошибки */
+    border: 1px solid #f5c6cb; /* Граница ошибки */
+}
+
+/* Уведомление об успехе */
+.notification-success {
+    background-color: #d4edda; /* Зеленый фон */
+    color: #155724; /* Цвет текста успеха */
+    border: 1px solid #c3e6cb; /* Граница успеха */
+}
+
+/* Информационное уведомление */
+.notification-info {
+    background-color: #cce5ff; /* Синий фон */
+    color: #004085; /* Цвет текста информации */
+    border: 1px solid #b8daff; /* Граница информации */
+}
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+    justify-content: flex-start; /* Выравниваем элементы по левому краю */
+    gap: 10px; /* Расстояние между плитками */
+    width: 100%; /* Ширина на всю ширину экрана */
+    padding: 20px; /* Отступы внутри контейнера */
+    box-sizing: border-box; /* Включаем отступы в ширину */
+}
+
+.sidebar {
+    width: 250px; /* Ширина боковой панели */
+    padding: 20px; /* Отступы */
+    border-right: 1px solid #ccc; /* Разделительная линия */
+}
+
+#search-results {
+    display: flex; /* Используем Flexbox для контейнера результатов */
+    flex-wrap: wrap; /* Позволяем элементам переноситься на новую строку */
+    justify-content: flex-start; /* Выравниваем элементы по левому краю */
+    gap: 10px; /* Расстояние между плитками */
+    padding: 20px; /* Отступы внутри контейнера */
+}
+
+.search-results {
+    flex: 1; /* Занимает оставшееся пространство */
+    padding: 20px; /* Отступы внутри контейнера */
+}
+
+.searched-image-tile {
+    flex: 0 1 calc(30% - 10px); /* Устанавливаем ширину на 30%, минус отступ */
+    box-sizing: border-box; /* Учитываем отступы в ширине */
+    padding: 15px; /* Отступы внутри плитки */
+    background-color: #ffffff; /* Цвет фона плитки */
+    border: 1px solid #e1e1e1; /* Граница плитки */
+    border-radius: 8px; /* Скругление углов у плитки */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень плитки */
+    min-width: 200px; /* Минимальная ширина плитки */
+    display: flex; /* Flexbox для плитки */
+    flex-direction: column; /* Располагаем элементы вертикально */
+    justify-content: space-between; /* Устанавливаем пространство между элементами */
+}
+
+.copy-button {
+    background: none; /* Убираем фон */
+    border: none; /* Убираем рамку */
+    cursor: pointer; /* Устанавливаем курсор в виде указателя */
+    padding: 0; /* Убираем отступы */
+    vertical-align: middle; /* Выравниваем иконку по вертикали с текстом */
+}
+
+.custom-tooltip {
+    display: none;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    z-index: 100; /* Обеспечивает, что подсказка будет сверху */
+}
+
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Фиксированное позиционирование */
+    z-index: 1000; /* Выше других элементов */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Прокрутка, если нужно */
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Цвет фона модалки */
+    margin: 15% auto; /* Отступ сверху и по центру */
+    padding: 20px; /* Отступ внутри модалки */
+    border: 1px solid #888; /* Граница модалки */
+    border-radius: 10px; /* Скругленные углы */
+    width: 80%; /* Ширина модалки */
+    max-width: 500px; /* Максимальная ширина модалки */
+    word-wrap: break-word; /* Перенос длинных слов */
+    overflow-wrap: break-word; /* Перенос длинных слов */
+    hyphens: auto; /* Автоматическое разделение слов, если необходимо */
+}
+
+#modal-message {
+    max-height: 200px; /* Максимальная высота текста */
+    overflow-y: auto; /* Прокрутка по вертикали, если текст превышает максимальную высоту */
+}
+.show-full-digest {
+    background-color: rgba(0, 123, 255, 0.8); /* Полупрозрачный синий цвет */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Скругленные углы */
+    padding: 8px 12px; /* Уменьшенные отступы */
+    cursor: pointer; /* Указатель при наведении */
+    font-size: 0.9rem; /* Меньший размер шрифта */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Плавные переходы */
+    margin-top: 10px; /* Отступ сверху */
+}
+
+.show-full-digest:hover {
+    background-color: rgba(0, 123, 255, 1); /* Непрозрачный синий цвет при наведении */
+    transform: scale(1.05); /* Увеличение при наведении */
+}
+
+.show-full-digest:focus {
+    outline: none; /* Убираем контур при фокусе */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-button-container {
+    display: flex;
+    justify-content: center; /* Центрируем кнопки по горизонтали */
+    gap: 10px; /* Отступ между кнопками */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.modal-confirm-button {
+    background-color: #28a745; /* Зеленый цвет для кнопки подтверждения */
+    color: white; /* Белый текст */
+    border: none; /* Убираем границы */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Курсор-указатель */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+.modal-confirm-button:hover {
+    background-color: #218838; /* Темнее зеленый при наведении */
+}
+
+.modal-cancel-button {
+    background-color: #007bff; /* Синий цвет для кнопки отмены */
+    color: white; /* Белый текст */
+    border: none; /* Убираем границы */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Курсор-указатель */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+.modal-cancel-button:hover {
+    background-color: #0056b3; /* Темнее синий при наведении */
+}
+
+.modal-content {
+    max-height: 400px; /* Максимальная высота модального окна */
+    overflow-y: auto;  /* Вертикальная прокрутка, если содержимое превышает высоту */
+}
+
+.close-button-style {
+    background-color: #4CAF50; /* Зеленый цвет фона */
+    color: white; /* Цвет текста */
+    border: none; /* Без границы */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    text-align: center; /* Центрируем текст */
+    text-decoration: none; /* Убираем подчеркивание */
+    display: inline-block; /* Включаем блочный элемент */
+    font-size: 16px; /* Размер шрифта */
+    margin-top: 10px; /* Отступ сверху */
+    border-radius: 5px; /* Скругление углов */
+    cursor: pointer; /* Указатель для курсора */
+    transition: background-color 0.3s; /* Плавный переход фона */
+}
+
+/* Эффект при наведении */
+.close-button-style:hover {
+    background-color: #45a049; /* Цвет при наведении */
+}
+.delete-button {
+    background-color: #e74c3c; /* Красный цвет для кнопки удаления */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px; /* Отступ между кнопками */
+}
+
+.cancel-button {
+    background-color: #3498db; /* Синий цвет для кнопки отмены */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}

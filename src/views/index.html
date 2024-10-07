@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Registry - Образы и версии</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Подключение CSS -->
+</head>
+<body>
+    <h1>STE Registry - Образы и версии</h1>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="tab-buttons">
+                <button id="show-images" onclick="showImages()">Образы</button>
+                <button id="search-image" onclick="showSearch()">Поиск образа</button>
+            </div>
+
+            <div id="search-form" style="display: none;">
+                <input type="text" id="search-input" placeholder="Введите имя образа...">
+                <button onclick="searchImage()">Найти</button>
+                <div style="margin-top: 10px;">
+                    <label>
+                        <input type="checkbox" id="sort-stars" onchange="sortResults('stars')"> Сорт. по звездам
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" id="sort-official" onchange="sortResults('official')"> Сорт. по статусу
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="images"></div>
+        <div class="search-results" id="search-results" style="display: none;"></div> <!-- Контейнер для результатов поиска -->
+
+    </div>
+
+    <!-- Модалка -->
+    <div id="confirmation-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title"></h3> <!-- Заголовок будет устанавливаться динамически -->
+            <p id="modal-message"></p>  <!-- Сообщение будет устанавливаться динамически -->
+            <div class="modal-button-container">
+                <button id="modal-confirm-button" class="modal-confirm-button" onclick="confirmAction()">Подтвердить</button>
+                <button id="modal-cancel-button" class="modal-cancel-button" onclick="closeModal()">Отмена</button>
+            </div>
+        </div>
+    </div>
+    <!-- Модальное окно для удаления образа с отображением дайджеста -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteModal()">&times;</span>
+            <h2 id="delete-modal-title">Удаление образа</h2>
+            <p id="delete-modal-message">Вы уверены, что хотите удалить этот образ?</p>
+            <div id="delete-modal-digest" style="margin-top: 10px;">Дайджест: <span id="delete-modal-digest-content"></span></div>
+            <button id="confirm-delete-button" class="delete-button">Удалить</button>
+            <button id="cancel-delete-button" class="cancel-button">Отмена</button>
+        </div>
+    </div>
+    <div id="notification" style="display: none;"></div> <!-- Универсальный контейнер для уведомлений -->
+    <script src="js/notifications.js"></script> <!-- Подключаем notifications.js -->
+    <script src="js/script.js"></script> <!-- Подключение JavaScript -->
+    <script src="js/search.js"></script> <!-- Подключение JavaScript для поиска образов -->
+    <script src="js/push_to_local.js"></script> <!-- Подключение Пуша -->
+    <script src="js/modal_doalog.js"></script> <!-- Подключение Модалки -->
+</body>
+</html>
